@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distrito Creativo San Felipe — Museo del Emprendimiento</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --cream: #f5f0e8;
+    --saffron: #f4a300;
+    --rust: #c93b1b;
+    --teal: #1a7a6e;
+    --lavender: #8b6fb5;
+    --lime: #b8d44e;
+    --white: #fafafa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: .4;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--saffron);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 60px 50px;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  }
+
+  .hero-left::before {
+    content: 'SAN\AFELIPE';
+    white-space: pre;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(90px, 14vw, 200px);
+    line-height: .85;
+    color: rgba(0,0,0,.08);
+    position: absolute;
+    top: 30px; left: 20px;
+    pointer-events: none;
+    letter-spacing: -2px;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: .6;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 110px);
+    line-height: .9;
+    color: var(--ink);
+    letter-spacing: -1px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--ink);
+    opacity: .75;
+    margin-top: 20px;
+    max-width: 340px;
+    line-height: 1.6;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    margin-top: 36px;
+    background: var(--ink);
+    color: var(--saffron);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: all .25s;
+  }
+  .hero-cta:hover { background: var(--rust); color: var(--white); }
+
+  .hero-right {
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 40px 60px 70px;
+    gap: 28px;
+  }
+
+  .stat-card {
+    border-left: 3px solid var(--saffron);
+    padding-left: 18px;
+    animation: fadeUp .6s both;
+  }
+  .stat-card:nth-child(2) { animation-delay: .1s; border-color: var(--rust); }
+  .stat-card:nth-child(3) { animation-delay: .2s; border-color: var(--teal); }
+  .stat-card:nth-child(4) { animation-delay: .3s; border-color: var(--lavender); }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(245,240,232,.5);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 100px 60px; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: .95;
+    color: var(--cream);
+    margin-bottom: 40px;
+  }
+
+  /* ─── HISTORIA ─── */
+  #historia {
+    background: #141414;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    position: relative;
+  }
+
+  .tl-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--saffron);
+    line-height: 1;
+  }
+
+  .tl-content h4 {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .tl-content p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(245,240,232,.55);
+  }
+
+  .historia-aside {
+    position: sticky;
+    top: 40px;
+  }
+
+  .quote-block {
+    background: var(--saffron);
+    color: var(--ink);
+    padding: 36px;
+    position: relative;
+  }
+  .quote-block::before {
+    content: '"';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    line-height: .7;
+    opacity: .15;
+    position: absolute;
+    top: 10px; left: 16px;
+  }
+  .quote-block blockquote {
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.7;
+    position: relative;
+  }
+  .quote-block cite {
+    display: block;
+    margin-top: 16px;
+    font-size: 11px;
+    font-style: normal;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: .6;
+  }
+
+  .map-box {
+    margin-top: 32px;
+    background: #1e1e1e;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 28px;
+  }
+  .map-box h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+  .map-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .map-box li {
+    font-size: 13px;
+    color: rgba(245,240,232,.7);
+    padding-left: 18px;
+    position: relative;
+  }
+  .map-box li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+  }
+
+  /* ─── ISENBERG ─── */
+  #isenberg {
+    background: var(--rust);
+    overflow: hidden;
+    position: relative;
+  }
+
+  #isenberg .section-label { color: var(--saffron); }
+  #isenberg .section-title { color: var(--white); }
+
+  #isenberg::before {
+    content: 'MERCADO';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22vw;
+    color: rgba(255,255,255,.05);
+    position: absolute;
+    bottom: -20px; right: -20px;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .isenberg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .iso-card {
+    background: rgba(0,0,0,.2);
+    padding: 28px;
+    transition: transform .2s, background .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .iso-card:hover {
+    transform: translateY(-4px);
+    background: rgba(0,0,0,.35);
+  }
+
+  .iso-card.featured {
+    grid-column: 1 / -1;
+    background: var(--ink);
+    border-left: 5px solid var(--saffron);
+  }
+
+  .iso-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .iso-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: .5px;
+  }
+
+  .iso-card.featured h3 { font-size: 36px; color: var(--saffron); }
+
+  .iso-card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(245,240,232,.65);
+  }
+
+  .iso-tag {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--saffron);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  .iso-card.featured .iso-tag { background: var(--teal); color: var(--white); }
+
+  /* ─── QUIZ ─── */
+  #quiz {
+    background: #0a0a0a;
+    min-height: 100vh;
+  }
+
+  .quiz-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .quiz-progress {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 50px;
+  }
+
+  .progress-dot {
+    height: 4px;
+    flex: 1;
+    background: rgba(255,255,255,.1);
+    border-radius: 2px;
+    transition: background .4s;
+  }
+  .progress-dot.active { background: var(--saffron); }
+  .progress-dot.done   { background: var(--teal); }
+
+  .quiz-card {
+    display: none;
+    animation: fadeUp .4s both;
+  }
+  .quiz-card.visible { display: block; }
+
+  .quiz-q-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(245,240,232,.35);
+    margin-bottom: 10px;
+  }
+
+  .quiz-q-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 36px;
+    letter-spacing: .5px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .opt-btn {
+    background: transparent;
+    border: 1.5px solid rgba(245,240,232,.15);
+    color: var(--cream);
+    padding: 18px 24px;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .opt-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--saffron);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s;
+    z-index: -1;
+  }
+  .opt-btn:hover { border-color: var(--saffron); color: var(--ink); }
+  .opt-btn:hover::before { transform: scaleX(1); }
+
+  .opt-btn.correct {
+    border-color: var(--teal);
+    background: var(--teal);
+    color: var(--white);
+  }
+  .opt-btn.correct::before { display: none; }
+
+  .opt-btn.wrong {
+    border-color: var(--rust);
+    background: var(--rust);
+    color: var(--white);
+  }
+  .opt-btn.wrong::before { display: none; }
+
+  .opt-btn.disabled { pointer-events: none; opacity: .5; }
+  .opt-btn.correct.disabled, .opt-btn.wrong.disabled { opacity: 1; }
+
+  .quiz-feedback {
+    margin-top: 24px;
+    padding: 20px;
+    border-left: 4px solid var(--teal);
+    background: rgba(26,122,110,.12);
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(245,240,232,.8);
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.wrong-feedback { border-color: var(--rust); background: rgba(201,59,27,.12); }
+
+  .next-btn {
+    display: none;
+    margin-top: 28px;
+    background: var(--saffron);
+    border: none;
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .next-btn:hover { background: var(--cream); }
+  .next-btn.show { display: inline-block; }
+
+  /* Result screen */
+  .quiz-result {
+    display: none;
+    text-align: center;
+    padding: 60px 0;
+    animation: fadeUp .5s both;
+  }
+  .quiz-result.show { display: block; }
+
+  .result-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    line-height: 1;
+    color: var(--saffron);
+  }
+
+  .result-label {
+    font-size: 16px;
+    color: rgba(245,240,232,.6);
+    margin-bottom: 32px;
+  }
+
+  .result-msg {
+    font-size: 18px;
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .restart-btn {
+    background: transparent;
+    border: 2px solid var(--saffron);
+    color: var(--saffron);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .restart-btn:hover { background: var(--saffron); color: var(--ink); }
+
+  /* ─── EMPRENDEDORES ─── */
+  #actores {
+    background: #111;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .actor-sidebar {
+    position: sticky;
+    top: 40px;
+  }
+
+  .actor-sidebar .section-title { font-size: clamp(32px, 4vw, 56px); }
+
+  .actor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .actor-tab {
+    background: #1a1a1a;
+    border: none;
+    color: rgba(245,240,232,.5);
+    padding: 16px 20px;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+    border-left: 3px solid transparent;
+  }
+  .actor-tab.active {
+    background: #232323;
+    color: var(--cream);
+    border-color: var(--saffron);
+  }
+  .actor-tab:hover:not(.active) { background: #1e1e1e; color: rgba(245,240,232,.8); }
+
+  .actor-panel { display: none; }
+  .actor-panel.active { display: block; animation: fadeUp .3s both; }
+
+  .actor-panel h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .actor-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 24px;
+  }
+
+  .actor-panel p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(245,240,232,.65);
+    margin-bottom: 16px;
+  }
+
+  .actor-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .a-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid;
+  }
+  .a-tag.t1 { border-color: var(--saffron); color: var(--saffron); }
+  .a-tag.t2 { border-color: var(--teal);    color: var(--teal);    }
+  .a-tag.t3 { border-color: var(--lavender);color: var(--lavender);}
+  .a-tag.t4 { border-color: var(--lime);    color: var(--lime);    }
+
+  /* ─── FOOTER / CREDITOS ─── */
+  footer {
+    background: var(--saffron);
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  footer h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+    color: var(--ink);
+    line-height: .9;
+  }
+
+  .foot-info p {
+    font-size: 13px;
+    color: rgba(14,14,14,.65);
+    line-height: 1.7;
+  }
+
+  .foot-info strong {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(14,14,14,.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--saffron);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,240,232,.5);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { clip-path: none; min-height: 60vh; }
+    .hero-right { padding: 40px; flex-direction: row; flex-wrap: wrap; }
+    #historia, #actores, footer { grid-template-columns: 1fr; }
+    .historia-aside, .actor-sidebar { position: static; }
+    section { padding: 70px 28px; }
+    nav { padding: 14px 24px; }
+    .nav-links { display: none; }
+    .isenberg-grid { grid-template-columns: 1fr; }
+    .iso-card.featured { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">DC San Felipe</a>
+  <ul class="nav-links">
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#isenberg">Ecosistema</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#actores">Actores</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="inicio" style="padding:0">
+  <div class="hero-left">
+    <p class="hero-tag">Museo del Emprendimiento · EAN Universidad</p>
+    <h1 class="hero-title">Distrito<br>Creativo<br>San Felipe</h1>
+    <p class="hero-sub">El barrio donde el arte se convirtió en ecosistema emprendedor. Un caso vivo del <strong>Dominio de Mercado de Isenberg</strong>.</p>
+    <a href="https://www.culturarecreacionydeporte.gov.co/es/distritos-creativos/san-felipe" target="_blank" class="hero-cta">Recorrer el Museo →</a>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card"><div class="stat-num">+70</div><div class="stat-label">Espacios creativos activos</div></div>
+    <div class="stat-card"><div class="stat-num">30+</div><div class="stat-label">Equipamientos culturales</div></div>
+    <div class="stat-card"><div class="stat-num">15</div><div class="stat-label">Distritos creativos en Bogotá</div></div>
+    <div class="stat-card"><div class="stat-num">2019</div><div class="stat-label">Año de declaración oficial (ADN)</div></div>
+  </div>
+</section>
+
+<!-- ─── HISTORIA ─── -->
+<section id="historia">
+  <div>
+    <p class="section-label">01 — Origen</p>
+    <h2 class="section-title">La historia de<br>una transformación</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1930</div>
+        <div class="tl-content">
+          <h4>Fundación del barrio</h4>
+          <p>San Felipe nace como zona residencial de clase media en Barrios Unidos. Décadas después se consolida como zona industrial de talleres automotrices.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2010</div>
+        <div class="tl-content">
+          <h4>La visión de Alejandro Castaño</h4>
+          <p>El arquitecto y coleccionista Alejandro Castaño llega al barrio y compra casas abandonadas con la idea de crear un Wynwood bogotano. Inaugura las primeras galerías: 12:00, Beta, Sketch y Flora Ars+Natura.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2018</div>
+        <div class="tl-content">
+          <h4>Nace Open San Felipe</h4>
+          <p>Johanna Morales, Alejandro Rauhut y Daniel Espinosa crean el festival abriendo galerías y estudios al público. La primera edición supera los 1.000 visitantes.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2019</div>
+        <div class="tl-content">
+          <h4>Reconocimiento oficial</h4>
+          <p>El barrio es declarado Área de Desarrollo Naranja (ADN) y primer Proyecto de Interés Nacional Naranja (PINE) en Colombia. La Alcaldía invierte +12.800 millones de pesos en infraestructura.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Hoy</div>
+        <div class="tl-content">
+          <h4>El epicentro creativo de Bogotá</h4>
+          <p>Más de 70 espacios entre galerías, estudios, gastrobares, cafés y talleres. El barrio con la mayor concentración de galerías de arte de la ciudad. Índice de Desarrollo Humano de 0.86 (vs 0.81 promedio Bogotá).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="historia-aside">
+    <div class="quote-block">
+      <blockquote>
+        "No podía creer cómo no se conocía este espacio. En una misma casa: un taller, una galería, una tienda natural y una chica vendiendo café. ¡Debería estar abierto!"
+        <cite>— Johanna Morales, cofundadora Open San Felipe</cite>
+      </blockquote>
+    </div>
+    <div class="map-box">
+      <h4>📍 Dónde está</h4>
+      <ul>
+        <li>Localidad de Barrios Unidos, Bogotá</li>
+        <li>Entre Av. Caracas y Carrera 24</li>
+        <li>Entre Calles 68 y 80</li>
+        <li>Parque central: Parque La Araña</li>
+        <li>1.745 m² de espacio peatonal exclusivo</li>
+        <li>1 km de ciclovía exclusiva</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ISENBERG ─── -->
+<section id="isenberg">
+  <p class="section-label">02 — Teoría</p>
+  <h2 class="section-title">San Felipe &amp;<br>los 6 Dominios<br>de Isenberg</h2>
+  <div class="isenberg-grid">
+    <div class="iso-card featured">
+      <div class="iso-icon">🛒</div>
+      <h3>Dominio de Mercado — San Felipe</h3>
+      <p>San Felipe es un ejemplo perfecto del dominio de Mercado del ecosistema emprendedor de Isenberg. Cuenta con <strong>primeros adoptadores reales</strong> (la comunidad artística y turistas culturales) y con <strong>redes empresariales</strong> que conectan artistas, galerías, restaurantes y el sector turístico. El festival Open San Felipe actúa como <em>canal de distribución</em> que abre el mercado al público masivo.</p>
+
+    </div>
+    <div class="iso-card">
+      <div class="iso-icon">🏛️</div>
+      <h3>Políticas</h3>
+      <p>Declaratoria ADN (2019), decreto de Distritos Creativos de Bogotá, inversión pública de la Alcaldía y apoyo de la Secretaría de Cultura SCRD.</p>
+    </div>
+    <div class="iso-card">
+      <div class="iso-icon">💰</div>
+      <h3>Financiamiento</h3>
+      <p>Inversión privada de coleccionistas (Castaño), fondos del SCRD para incentivos artísticos, y capital de galerías internacionales que llegan al barrio.</p>
+    </div>
+    <div class="iso-card">
+      <div class="iso-icon">🎨</div>
+      <h3>Cultura</h3>
+      <p>Tolerancia total al experimento artístico, comunidad que celebra la creatividad, historia de éxito visible: el barrio mismo es el referente.</p>
+    </div>
+    <div class="iso-card">
+      <div class="iso-icon">🎓</div>
+      <h3>Capital Humano</h3>
+      <p>Artistas, diseñadores, muralistas, galeristas, arquitectos, chefs y emprendedores creativos que se aglomeran orgánicamente en el territorio.</p>
+    </div>
+    <div class="iso-card">
+      <div class="iso-icon">🤝</div>
+      <h3>Servicios / Apoyos</h3>
+      <p>Idartes, ZAE (Zona de Arte y Emprendimiento), Nodo Cultural San Felipe, ARTBO, talleres formativos y programas de aceleración artística.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUIZ ─── -->
+<section id="quiz">
+  <p class="section-label">03 — Prueba tu conocimiento</p>
+  <h2 class="section-title">Quiz:<br>¿Cuánto sabes<br>de San Felipe?</h2>
+
+  <div class="quiz-wrapper">
+    <div class="quiz-progress" id="quizProgress"></div>
+
+    <!-- Questions -->
+    <div id="quizContainer"></div>
+
+    <!-- Result -->
+    <div class="quiz-result" id="quizResult">
+      <div class="result-score" id="resultScore"></div>
+      <p class="result-label">respuestas correctas</p>
+      <p class="result-msg" id="resultMsg"></p>
+      <button class="restart-btn" onclick="restartQuiz()">Volver a intentarlo ↺</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ACTORES ─── -->
+<section id="actores">
+  <div class="actor-sidebar">
+    <p class="section-label">04 — Protagonistas</p>
+    <h2 class="section-title">Los actores<br>del ecosistema</h2>
+    <div class="actor-list">
+      <button class="actor-tab active" onclick="showActor(0, this)">Alejandro Castaño</button>
+      <button class="actor-tab" onclick="showActor(1, this)">Johanna Morales</button>
+      <button class="actor-tab" onclick="showActor(2, this)">Galería 12:00</button>
+      <button class="actor-tab" onclick="showActor(3, this)">Idartes / SCRD</button>
+    </div>
+  </div>
+  <div id="actorPanels">
+    <div class="actor-panel active">
+      <h3>Alejandro Castaño</h3>
+      <p class="actor-role">Arquitecto · Coleccionista · Visionario fundador</p>
+      <p>Castaño llegó a San Felipe cuando el barrio era mayoritariamente residencial e industrial. Su sueño era crear algo similar a Wynwood (Miami) o SoHo (Nueva York): un barrio donde en unas pocas cuadras convivieran galerías, tiendas de diseño, cafés y talleres de arte.</p>
+      <p>Compró casas abandonadas y antiguas fábricas para transformarlas en espacios de arte, y convenció a otros coleccionistas y galeristas de unirse. Fue el catalizador del ecosistema creativo. Sin su visión, San Felipe seguiría siendo un barrio de talleres mecánicos.</p>
+      <div class="actor-tags">
+        <span class="a-tag t1">Emprendedor</span>
+        <span class="a-tag t2">Early Adopter</span>
+        <span class="a-tag t3">Redes empresariales</span>
+      </div>
+    </div>
+    <div class="actor-panel">
+      <h3>Johanna Morales</h3>
+      <p class="actor-role">Actriz · Productora · Cofundadora Open San Felipe</p>
+      <p>Actriz y productora de teatro, Johanna llegó a San Felipe y quedó maravillada de la cantidad de artistas que vivían allí sin que nadie los conociera. Junto con Alejandro Rauhut y Daniel Espinosa creó el festival Open San Felipe, inspirado en el Open Studios de San Francisco.</p>
+      <p>Tocó puerta a puerta cada galería, taller y restaurante del barrio. Hoy, el festival reúne cerca de 70 espacios y miles de visitantes por edición, consolidando a San Felipe como el principal destino cultural de Bogotá.</p>
+      <div class="actor-tags">
+        <span class="a-tag t1">Liderazgo</span>
+        <span class="a-tag t2">Networking</span>
+        <span class="a-tag t4">Canal de mercado</span>
+      </div>
+    </div>
+    <div class="actor-panel">
+      <h3>Galería 12:00</h3>
+      <p class="actor-role">Galería fundadora · Arte contemporáneo colombiano</p>
+      <p>Fundada por Mauricio Gómez Jaramillo, fue una de las primeras galerías en apostar por San Felipe. Representa artistas contemporáneos colombianos con trayectorias consolidadas y sirve como referente del mercado del arte en la ciudad.</p>
+      <p>Tiene cuatro salas de exposición en planta baja y cuatro talleres en el segundo nivel. Su presencia temprana validó a San Felipe como destino serio del mercado del arte latinoamericano.</p>
+      <div class="actor-tags">
+        <span class="a-tag t1">Arte contemporáneo</span>
+        <span class="a-tag t3">Mercado artístico</span>
+        <span class="a-tag t2">Primer adoptador</span>
+      </div>
+    </div>
+    <div class="actor-panel">
+      <h3>Idartes / SCRD</h3>
+      <p class="actor-role">Instituto Distrital de las Artes · Secretaría de Cultura</p>
+      <p>El Instituto Distrital de las Artes y la Secretaría de Cultura, Recreación y Deporte son los actores institucionales del ecosistema. Organizan la ZAE (Zona de Arte y Emprendimiento), financian incentivos a artistas y declaran políticas públicas de Distritos Creativos.</p>
+      <p>En 2019 declararon a San Felipe como primer Área de Desarrollo Naranja de Colombia. La SCRD ha invertido más de 12.800 millones de pesos en infraestructura y espacio público para el barrio.</p>
+      <div class="actor-tags">
+        <span class="a-tag t2">Política pública</span>
+        <span class="a-tag t1">Financiamiento</span>
+        <span class="a-tag t4">Economía naranja</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div>
+    <h2>Museo del<br>Emprendimiento<br>EAN 2025</h2>
+  </div>
+  <div class="foot-info">
+    <p><strong>Equipo — Cultura del Emprendimiento I</strong>
+      Bloque temático: Emprendimiento diverso, creativo y cultural<br>
+      Tema: Distrito Creativo San Felipe + Dominio de Mercado (Isenberg)<br>
+      Universidad EAN · Bogotá, Colombia
+    </p>
+    <p style="margin-top:20px; font-size:11px; opacity:.5">
+      Fuentes: Secretaría de Cultura SCRD · Idartes · Semana · El Espectador · ArchDaily · OpenSanFelipe.com
+    </p>
+  </div>
+</footer>
+
+<script>
+// ─── QUIZ DATA ───
+const questions = [
+  {
+    q: "¿Quién fue el visionario que inició la transformación artística de San Felipe?",
+    opts: ["Johanna Morales", "Alejandro Castaño", "Mauricio Gómez", "Daniel Espinosa"],
+    ans: 1,
+    fb: "Alejandro Castaño, arquitecto y coleccionista de arte, llegó a San Felipe alrededor de 2010 con la visión de crear un barrio artístico similar a Wynwood (Miami). Compró casas abandonadas y convenció a galeristas de instalarse allí."
+  },
+  {
+    q: "¿En qué año San Felipe fue declarado Área de Desarrollo Naranja (ADN) y primer PINE naranja de Colombia?",
+    opts: ["2015", "2017", "2019", "2021"],
+    ans: 2,
+    fb: "En 2019 la Alcaldía de Bogotá declaró a San Felipe como Área de Desarrollo Naranja y primer Proyecto de Interés Nacional Naranja de Colombia, reconociendo su potencial como motor de economía creativa."
+  },
+  {
+    q: "Según el modelo de Isenberg, ¿a qué dominio corresponde el papel de las galerías y el festival Open San Felipe como canales para llegar a los compradores?",
+    opts: ["Capital Humano", "Cultura", "Mercado", "Políticas"],
+    ans: 2,
+    fb: "El dominio de Mercado de Isenberg incluye los canales de distribución, las redes empresariales y los primeros adoptadores (early adopters). Open San Felipe funciona exactamente como un canal de mercado que conecta artistas-emprendedores con el público consumidor."
+  },
+  {
+    q: "¿Cuántos espacios creativos (galerías, estudios, gastrobares) hay aproximadamente en el Distrito San Felipe hoy?",
+    opts: ["Más de 10", "Más de 30", "Más de 70", "Más de 200"],
+    ans: 2,
+    fb: "Actualmente San Felipe reúne más de 70 espacios entre galerías, estudios de artistas, talleres de moda, gastrobares, cafés y restaurantes. El Open San Felipe aglomera cerca de 70 de estos espacios en su festival."
+  },
+  {
+    q: "¿Qué concepto urbanístico global fue la inspiración que Alejandro Castaño quería replicar en Bogotá?",
+    opts: ["Montmartre en París", "Wynwood en Miami / SoHo en Nueva York", "Camden Town en Londres", "Shibuya en Tokio"],
+    ans: 1,
+    fb: "Castaño soñaba con un barrio similar a Wynwood (Miami) o SoHo / Lower East Side (Nueva York): lugares donde galerías, tiendas de diseño, restaurantes y bares conviven en pocas cuadras atrayendo a los amantes de la cultura."
+  },
+  {
+    q: "¿Cuál es el índice de Desarrollo Humano del barrio San Felipe, comparado con el promedio de Bogotá?",
+    opts: ["0.65 (vs 0.81 Bogotá)", "0.86 (vs 0.81 Bogotá)", "0.90 (vs 0.85 Bogotá)", "Igual al promedio de Bogotá"],
+    ans: 1,
+    fb: "Según el Informe de Calidad de Vida de Bogotá Cómo Vamos, el barrio San Felipe tiene un IDH de 0.86, por encima del promedio de 0.81 de Bogotá, lo que refleja el impacto positivo de la transformación creativa en la calidad de vida local."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function buildQuiz() {
+  const prog = document.getElementById('quizProgress');
+  prog.innerHTML = questions.map((_, i) =>
+    `<div class="progress-dot" id="dot-${i}"></div>`
+  ).join('');
+
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = questions.map((q, i) => `
+    <div class="quiz-card ${i === 0 ? 'visible' : ''}" id="card-${i}">
+      <p class="quiz-q-num">Pregunta ${i+1} de ${questions.length}</p>
+      <h3 class="quiz-q-text">${q.q}</h3>
+      <div class="quiz-options">
+        ${q.opts.map((opt, j) =>
+          `<button class="opt-btn" onclick="answer(${i}, ${j})">${String.fromCharCode(65+j)}) ${opt}</button>`
+        ).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb-${i}"></div>
+      <button class="next-btn" id="next-${i}" onclick="nextQ(${i})">${i < questions.length-1 ? 'Siguiente →' : 'Ver resultados →'}</button>
+    </div>
+  `).join('');
+
+  updateDots();
+}
+
+function updateDots() {
+  questions.forEach((_, i) => {
+    const dot = document.getElementById(`dot-${i}`);
+    if (i < current)      dot.className = 'progress-dot done';
+    else if (i === current) dot.className = 'progress-dot active';
+    else                   dot.className = 'progress-dot';
+  });
+}
+
+function answer(qi, sel) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  const btns = document.querySelectorAll(`#card-${qi} .opt-btn`);
+  const fb = document.getElementById(`fb-${qi}`);
+  const next = document.getElementById(`next-${qi}`);
+
+  btns.forEach((btn, i) => {
+    btn.classList.add('disabled');
+    if (i === q.ans) btn.classList.add('correct');
+    else if (i === sel && sel !== q.ans) btn.classList.add('wrong');
+  });
+
+  if (sel === q.ans) {
+    score++;
+    fb.textContent = '✅ ' + q.fb;
+    fb.className = 'quiz-feedback show';
+  } else {
+    fb.textContent = '❌ ' + q.fb;
+    fb.className = 'quiz-feedback show wrong-feedback';
+  }
+
+  next.classList.add('show');
+}
+
+function nextQ(qi) {
+  document.getElementById(`card-${qi}`).classList.remove('visible');
+  current++;
+  answered = false;
+
+  if (current < questions.length) {
+    document.getElementById(`card-${current}`).classList.add('visible');
+    updateDots();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizContainer').style.display = 'none';
+  const res = document.getElementById('quizResult');
+  res.classList.add('show');
+  document.getElementById('resultScore').textContent = `${score}/${questions.length}`;
+
+  const pct = score / questions.length;
+  let msg = '';
+  if (pct === 1)       msg = '🏆 ¡Perfecto! Eres un experto en el Distrito Creativo San Felipe. ¡Listo para ser guía en el Open San Felipe!';
+  else if (pct >= .7)  msg = '🎨 ¡Muy bien! Tienes un sólido conocimiento del ecosistema creativo de San Felipe. Solo algunos detalles por reforzar.';
+  else if (pct >= .5)  msg = '🖌️ Buen inicio. Ya conoces lo básico del Distrito, pero vale la pena repasar la historia y la conexión con el modelo de Isenberg.';
+  else                 msg = '📚 Te recomendamos repasar la investigación. San Felipe tiene una historia fascinante que vale mucho la pena conocer a fondo.';
+
+  document.getElementById('resultMsg').textContent = msg;
+}
+
+function restartQuiz() {
+  score = 0; current = 0; answered = false;
+  document.getElementById('quizResult').classList.remove('show');
+  document.getElementById('quizContainer').style.display = '';
+  buildQuiz();
+}
+
+// ─── ACTORS ───
+function showActor(idx, btn) {
+  document.querySelectorAll('.actor-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.actor-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.actor-panel')[idx].classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── INIT ───
+buildQuiz();
+</script>
+</body>
+</html>
